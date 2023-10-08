@@ -43,10 +43,20 @@ public class HealthCheckController {
 		return ResponseEntity.ok().body(response);
 	}
 
-	@GetMapping("/v5")
+	/*@GetMapping("/v5")
 	public ResponseEntity<HealthCheckResponse> healthCheckV5() {
 		return ResponseEntity.ok().body(new HealthCheckResponse());
 		// HealthCheckReponse 클래스에 @Getter를 붙인 이유는 Json으로 직렬화할 때 값을 getter로 읽어와야 하는데 빼게 되면
 		// org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation 라는 예외가 터진다.
+	}*/
+
+	@GetMapping("/v6")
+	public ResponseEntity<HealthCheckResponse<Object>> healthCheckV6() {
+		return ResponseEntity.ok().body(HealthCheckResponse.ofSuccess());
+	}
+
+	@GetMapping("/v6/fail")
+	public ResponseEntity<HealthCheckResponse<Object>> healthCheckV6WithFail() {
+		return ResponseEntity.ok().body(HealthCheckResponse.ofFail(400, "Bad Request"));
 	}
 }
