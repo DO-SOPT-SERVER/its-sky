@@ -7,21 +7,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor(staticName = "of")
-public class HealthCheckResponse<D> {
+public class HealthCheckResponse<T> {
 	private final int code;
 	private final String status;
 	private final boolean success;
-	private final D data;
+	private final T data;
 
-	public static <D> HealthCheckResponse<D> ofSuccess() {
+	public static <T> HealthCheckResponse<T> ofSuccess() {
 		return of(200, "OK", true, null);
 	}
 
-	public static <D> HealthCheckResponse<D> ofSuccess(String msg, D data) {
+	public static <T> HealthCheckResponse<T> ofSuccess(String msg, T data) {
 		return of(200, msg, true, data);
 	}
 
-	public static <D> HealthCheckResponse<D> ofFail(int code, String msg) {
+	public static <T> HealthCheckResponse<T> ofFail(int code, String msg) {
 		return of(code, msg, false, null);
 	}
 }
