@@ -1,10 +1,10 @@
-package org.sopt.Seminar.member.controller;
+package org.sopt.Seminar.domain.member.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sopt.Seminar.member.dto.MemberCreateRequest;
-import org.sopt.Seminar.member.dto.MemberGetResponse;
-import org.sopt.Seminar.member.dto.MemberProfileUpdateRequest;
-import org.sopt.Seminar.member.service.MemberService;
+import org.sopt.Seminar.domain.member.service.MemberService;
+import org.sopt.Seminar.domain.member.dto.MemberCreateRequest;
+import org.sopt.Seminar.domain.member.dto.MemberGetResponse;
+import org.sopt.Seminar.domain.member.dto.MemberProfileUpdateRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
