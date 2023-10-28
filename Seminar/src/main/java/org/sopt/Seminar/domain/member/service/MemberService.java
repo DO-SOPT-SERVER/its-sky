@@ -1,13 +1,13 @@
-package org.sopt.Seminar.member.service;
+package org.sopt.Seminar.domain.member.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.sopt.Seminar.member.domain.Member;
-import org.sopt.Seminar.member.domain.SOPT;
-import org.sopt.Seminar.member.dto.MemberCreateRequest;
-import org.sopt.Seminar.member.dto.MemberGetResponse;
-import org.sopt.Seminar.member.dto.MemberProfileUpdateRequest;
-import org.sopt.Seminar.member.repository.MemberRepository;
+import org.sopt.Seminar.domain.member.model.Member;
+import org.sopt.Seminar.domain.member.model.SOPT;
+import org.sopt.Seminar.domain.member.dto.MemberCreateRequest;
+import org.sopt.Seminar.domain.member.dto.MemberGetResponse;
+import org.sopt.Seminar.domain.member.dto.MemberProfileUpdateRequest;
+import org.sopt.Seminar.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
