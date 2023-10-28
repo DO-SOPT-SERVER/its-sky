@@ -5,9 +5,11 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.sopt.Seminar.domain.post.dto.PostCreateRequest;
 import org.sopt.Seminar.domain.post.dto.PostGetResponse;
+import org.sopt.Seminar.domain.post.dto.PostUpdateRequest;
 import org.sopt.Seminar.domain.post.service.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,5 +40,12 @@ public class PostController {
     @GetMapping
     public ResponseEntity<List<PostGetResponse>> getPosts(@RequestHeader(CUSTOM_AUTH_ID) Long memberId) {
         return ResponseEntity.ok().body(postService.getPosts(memberId));
+    }
+
+    @PatchMapping("{postId}")
+    public ResponseEntity<Void> updatePost(@PathVariable Long postId,
+                                           @RequestBody PostUpdateRequest request) {
+        postService.editContent(postId, request);
+        return ResponseEntity.noContent().build();
     }
 }

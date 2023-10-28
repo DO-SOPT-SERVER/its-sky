@@ -1,5 +1,6 @@
 package org.sopt.Seminar.domain.post.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.sopt.Seminar.domain.member.model.Member;
 import org.sopt.Seminar.domain.member.repository.MemberRepository;
 import org.sopt.Seminar.domain.post.dto.PostCreateRequest;
 import org.sopt.Seminar.domain.post.dto.PostGetResponse;
+import org.sopt.Seminar.domain.post.dto.PostUpdateRequest;
 import org.sopt.Seminar.domain.post.model.Post;
 import org.sopt.Seminar.domain.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -43,5 +45,12 @@ public class PostService {
         List<Post> posts = postRepository.findAllByMember(member);
 
         return posts.stream().map(PostGetResponse::of).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void editContent(Long postId, PostUpdateRequest request) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 게시물을 찾을 수 없습니다."));
+        post.updateContent(request.content());
     }
 }
