@@ -13,12 +13,13 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.sopt.Seminar.global.BaseTimeEntity;
 
 @Entity
 @Builder
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
-public class Post {
+public class Post extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)
     public Long postId;

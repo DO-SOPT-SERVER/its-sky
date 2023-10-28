@@ -1,17 +1,21 @@
 package org.sopt.Seminar.member.domain;
 
-import jakarta.persistence.*;
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import static jakarta.persistence.GenerationType.*;
+import org.sopt.Seminar.global.BaseTimeEntity;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseTimeEntity {
 
 	@Id @GeneratedValue(strategy = IDENTITY)
 	private Long id;
