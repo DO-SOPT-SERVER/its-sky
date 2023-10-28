@@ -1,7 +1,6 @@
-package org.sopt.Seminar.member.domain;
+package org.sopt.Seminar.domain.member.model;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

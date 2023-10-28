@@ -1,4 +1,4 @@
-package org.sopt.Seminar.member.domain;
+package org.sopt.Seminar.domain.member.model;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 

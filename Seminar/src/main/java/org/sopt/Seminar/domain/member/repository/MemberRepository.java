@@ -1,7 +1,7 @@
-package org.sopt.Seminar.member.repository;
+package org.sopt.Seminar.domain.member.repository;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.sopt.Seminar.member.domain.Member;
+import org.sopt.Seminar.domain.member.model.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
