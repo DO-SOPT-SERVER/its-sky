@@ -53,4 +53,9 @@ public class PostService {
                 .orElseThrow(() -> new EntityNotFoundException("해당 게시물을 찾을 수 없습니다."));
         post.updateContent(request.content());
     }
+
+    @Transactional
+    public void deleteById(Long postId) {
+        postRepository.deleteById(postId);
+    }
 }

@@ -8,6 +8,7 @@ import org.sopt.Seminar.domain.post.dto.PostGetResponse;
 import org.sopt.Seminar.domain.post.dto.PostUpdateRequest;
 import org.sopt.Seminar.domain.post.service.PostService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +47,12 @@ public class PostController {
     public ResponseEntity<Void> updatePost(@PathVariable Long postId,
                                            @RequestBody PostUpdateRequest request) {
         postService.editContent(postId, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("{postId}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
+        postService.deleteById(postId);
         return ResponseEntity.noContent().build();
     }
 }
