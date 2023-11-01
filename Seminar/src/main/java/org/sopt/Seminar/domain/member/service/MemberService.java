@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.Seminar.domain.member.dto.MemberCreateRequest;
 import org.sopt.Seminar.domain.member.dto.MemberGetResponse;
 import org.sopt.Seminar.domain.member.dto.MemberProfileUpdateRequest;
-import org.sopt.Seminar.domain.member.exception.UserNotFoundException;
+import org.sopt.Seminar.domain.member.exception.MemberNotFoundException;
 import org.sopt.Seminar.domain.member.model.Member;
 import org.sopt.Seminar.domain.member.model.SOPT;
 import org.sopt.Seminar.domain.member.repository.MemberRepository;
@@ -24,7 +24,7 @@ public class MemberService {
 	}
 
 	public MemberGetResponse getMemberByIdV2(Long id) {
-		return MemberGetResponse.of(memberRepository.findById(id).orElseThrow(UserNotFoundException::new));
+		return MemberGetResponse.of(memberRepository.findById(id).orElseThrow(MemberNotFoundException::new));
 	}
 
 	public MemberGetResponse getMemberByIdV3(Long id) {
@@ -38,7 +38,7 @@ public class MemberService {
 	}
 
 	public Member findByIdOrThrow(Long id) {
-		return memberRepository.findById(id).orElseThrow(UserNotFoundException::new);
+		return memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
 	}
 
 	public List<MemberGetResponse> getMembers() {
@@ -61,7 +61,7 @@ public class MemberService {
 
 	@Transactional
 	public void updateSOPT(Long id, MemberProfileUpdateRequest request) {
-		Member member = memberRepository.findById(id).orElseThrow(UserNotFoundException::new);
+		Member member = memberRepository.findById(id).orElseThrow(MemberNotFoundException::new);
 		member.updateSOPT(new SOPT(request.getGeneration(), request.getPart()));
 	}
 
