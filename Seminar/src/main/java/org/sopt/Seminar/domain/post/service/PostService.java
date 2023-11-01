@@ -2,7 +2,6 @@ package org.sopt.Seminar.domain.post.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.sopt.Seminar.domain.member.model.Member;
 import org.sopt.Seminar.domain.member.repository.MemberRepository;
@@ -44,7 +43,7 @@ public class PostService {
         Member member = memberRepository.findByIdOrThrow(memberId);
         List<Post> posts = postRepository.findAllByMember(member);
 
-        return posts.stream().map(PostGetResponse::of).collect(Collectors.toList());
+        return posts.stream().map(PostGetResponse::of).toList();
     }
 
     @Transactional
