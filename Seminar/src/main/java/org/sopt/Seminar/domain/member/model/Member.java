@@ -10,7 +10,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.sopt.Seminar.global.BaseTimeEntity;
+import org.sopt.Seminar.global.common.model.BaseTimeEntity;
 
 @Entity
 @Getter

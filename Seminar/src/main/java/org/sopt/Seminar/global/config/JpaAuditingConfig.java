@@ -1,4 +1,4 @@
-package org.sopt.Seminar.global.configuration;
+package org.sopt.Seminar.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

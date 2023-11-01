@@ -14,8 +14,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sopt.Seminar.domain.category.model.CategoryId;
 import org.sopt.Seminar.domain.member.model.Member;
-import org.sopt.Seminar.global.BaseTimeEntity;
+import org.sopt.Seminar.global.common.model.BaseTimeEntity;
 
 @Entity
 @Builder
@@ -25,6 +26,7 @@ import org.sopt.Seminar.global.BaseTimeEntity;
 public class Post extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "post_id")
     public Long id;
 
     private String title;
@@ -35,6 +37,9 @@ public class Post extends BaseTimeEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Column(name = "category_id")
+    private CategoryId categoryId;
 
     public void updateContent(String content) {
         this.content = content;

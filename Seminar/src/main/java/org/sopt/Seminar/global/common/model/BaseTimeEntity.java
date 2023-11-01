@@ -1,4 +1,4 @@
-package org.sopt.Seminar.global;
+package org.sopt.Seminar.global.common.model;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
