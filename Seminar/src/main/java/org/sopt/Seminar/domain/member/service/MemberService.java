@@ -1,17 +1,16 @@
 package org.sopt.Seminar.domain.member.service;
 
-import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.sopt.Seminar.domain.member.model.Member;
-import org.sopt.Seminar.domain.member.model.SOPT;
 import org.sopt.Seminar.domain.member.dto.MemberCreateRequest;
 import org.sopt.Seminar.domain.member.dto.MemberGetResponse;
 import org.sopt.Seminar.domain.member.dto.MemberProfileUpdateRequest;
+import org.sopt.Seminar.domain.member.exception.UserNotFoundException;
+import org.sopt.Seminar.domain.member.model.Member;
+import org.sopt.Seminar.domain.member.model.SOPT;
 import org.sopt.Seminar.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class MemberService {
 	}
 
 	public MemberGetResponse getMemberByIdV2(Long id) {
-		return MemberGetResponse.of(memberRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다.")));
+		return MemberGetResponse.of(memberRepository.findById(id).orElseThrow(UserNotFoundException::new));
 	}
 
 	public MemberGetResponse getMemberByIdV3(Long id) {
@@ -39,7 +38,7 @@ public class MemberService {
 	}
 
 	public Member findByIdOrThrow(Long id) {
-		return memberRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
+		return memberRepository.findById(id).orElseThrow(UserNotFoundException::new);
 	}
 
 	public List<MemberGetResponse> getMembers() {
@@ -62,7 +61,7 @@ public class MemberService {
 
 	@Transactional
 	public void updateSOPT(Long id, MemberProfileUpdateRequest request) {
-		Member member = memberRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
+		Member member = memberRepository.findById(id).orElseThrow(UserNotFoundException::new);
 		member.updateSOPT(new SOPT(request.getGeneration(), request.getPart()));
 	}
 

@@ -1,6 +1,5 @@
 package org.sopt.Seminar.domain.post.service;
 
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.sopt.Seminar.domain.member.model.Member;
@@ -8,6 +7,7 @@ import org.sopt.Seminar.domain.member.repository.MemberRepository;
 import org.sopt.Seminar.domain.post.dto.PostCreateRequest;
 import org.sopt.Seminar.domain.post.dto.PostGetResponse;
 import org.sopt.Seminar.domain.post.dto.PostUpdateRequest;
+import org.sopt.Seminar.domain.post.exception.PostNotFoundException;
 import org.sopt.Seminar.domain.post.model.Post;
 import org.sopt.Seminar.domain.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class PostService {
 
     public PostGetResponse getById(Long postId) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
+                .orElseThrow(PostNotFoundException::new);
         return PostGetResponse.of(post);
     }
 
@@ -49,7 +49,7 @@ public class PostService {
     @Transactional
     public void editContent(Long postId, PostUpdateRequest request) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFoundException("해당 게시물을 찾을 수 없습니다."));
+                .orElseThrow(PostNotFoundException::new);
         post.updateContent(request.content());
     }
 
