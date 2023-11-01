@@ -2,8 +2,8 @@ package org.sopt.Seminar.domain.category.model;
 
 import static lombok.AccessLevel.PROTECTED;
 
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = PROTECTED)
 public class Category {
 
-    @EmbeddedId
+    @Id
     private CategoryId categoryId;
 
     private String content;
