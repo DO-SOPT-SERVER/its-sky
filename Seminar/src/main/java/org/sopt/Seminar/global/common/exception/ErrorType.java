@@ -31,7 +31,7 @@ public interface ErrorType {
 
         @Override
         public int getCode() {
-            return 0;
+            return this.errorCode;
         }
     }
 
@@ -48,7 +48,7 @@ public interface ErrorType {
 
         @Override
         public int getCode() {
-            return 0;
+            return this.errorCode;
         }
     }
 }
