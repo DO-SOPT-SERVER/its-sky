@@ -28,10 +28,6 @@ class PostService(
     fun create(request: PostCreateRequest, memberId: Long): String {
         val member = memberRepository.findByIdOrNull(memberId) ?: throw IllegalArgumentException("회원이 존재하지 않습니다")
         val categoryId = CategoryId(request.categoryId)
-        categoryRepository.save(
-            Category(categoryId, CategoryMapper.getCategoryNameById(request.categoryId))
-        )
-
         val post = postRepository.save(
             Post(
                 title = request.title,
@@ -39,6 +35,9 @@ class PostService(
                 member = member,
                 categoryId = categoryId
             )
+        )
+        categoryRepository.save(
+            Category(categoryId, CategoryMapper.getCategoryNameById(request.categoryId))
         )
 
         return post.id.toString()
