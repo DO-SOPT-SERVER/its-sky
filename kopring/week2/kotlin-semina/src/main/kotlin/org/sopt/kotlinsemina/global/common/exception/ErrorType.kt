@@ -9,7 +9,7 @@ interface ErrorType {
 
     enum class NotFound(override val errorCode: Int): ErrorType {
         POST_NOT_FOUND(4001),
-        USER_NOT_FOUND(4002),
+        MEMBER_NOT_FOUND(4002),
         CATEGORY_NOT_FOUND(4003)
     }
 
