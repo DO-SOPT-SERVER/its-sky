@@ -5,10 +5,12 @@ import org.sopt.kotlinsemina.domain.category.model.CategoryId
 import org.sopt.kotlinsemina.domain.category.model.CategoryMapper
 import org.sopt.kotlinsemina.domain.category.repository.CategoryRepository
 import org.sopt.kotlinsemina.domain.category.service.CategoryService
+import org.sopt.kotlinsemina.domain.member.exception.MemberNotFoundException
 import org.sopt.kotlinsemina.domain.member.repository.MemberRepository
 import org.sopt.kotlinsemina.domain.post.dto.PostCreateRequest
 import org.sopt.kotlinsemina.domain.post.dto.PostGetResponse
 import org.sopt.kotlinsemina.domain.post.dto.PostUpdateRequest
+import org.sopt.kotlinsemina.domain.post.exception.PostNotFoundException
 import org.sopt.kotlinsemina.domain.post.model.Post
 import org.sopt.kotlinsemina.domain.post.repository.PostRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -26,7 +28,7 @@ class PostService(
 ) {
     @Transactional
     fun create(request: PostCreateRequest, memberId: Long): String {
-        val member = memberRepository.findByIdOrNull(memberId) ?: throw IllegalArgumentException("회원이 존재하지 않습니다")
+        val member = memberRepository.findByIdOrNull(memberId) ?: throw MemberNotFoundException()
         val categoryId = CategoryId(request.categoryId)
         val post = postRepository.save(
             Post(
@@ -44,13 +46,13 @@ class PostService(
     }
 
     fun getById(postId: Long): PostGetResponse {
-        val post = postRepository.findByIdOrNull(postId) ?: throw IllegalArgumentException("게시물이 존재하지 않습니다")
+        val post = postRepository.findByIdOrNull(postId) ?: throw PostNotFoundException()
 
         return PostGetResponse.of(post, getCategoryByPost(post))
     }
 
     fun getPosts(memberId: Long): List<PostGetResponse> {
-        val member = memberRepository.findByIdOrNull(memberId) ?: throw IllegalArgumentException("회원이 존재하지 않습니다")
+        val member = memberRepository.findByIdOrNull(memberId) ?: throw MemberNotFoundException()
         val posts = postRepository.findAllByMember(member)
 
         return posts.map { PostGetResponse.of(it, getCategoryByPost(it)) }.toList()
@@ -58,7 +60,7 @@ class PostService(
 
     @Transactional
     fun editContent(postId: Long, request: PostUpdateRequest) {
-        val post = postRepository.findByIdOrNull(postId) ?: throw IllegalArgumentException("게시물이 존재하지 않습니다")
+        val post = postRepository.findByIdOrNull(postId) ?: throw PostNotFoundException()
         post.updateContent(request.content)
     }
 

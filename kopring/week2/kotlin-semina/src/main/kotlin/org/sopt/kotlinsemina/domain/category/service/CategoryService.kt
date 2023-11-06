@@ -1,5 +1,6 @@
 package org.sopt.kotlinsemina.domain.category.service
 
+import org.sopt.kotlinsemina.domain.category.exception.CategoryNotFoundException
 import org.sopt.kotlinsemina.domain.category.model.Category
 import org.sopt.kotlinsemina.domain.category.model.CategoryId
 import org.sopt.kotlinsemina.domain.category.repository.CategoryRepository
@@ -14,6 +15,6 @@ class CategoryService(
     private val categoryRepository: CategoryRepository
 ) {
     fun getByCategoryId(categoryId: CategoryId): Category {
-        return categoryRepository.findByIdOrNull(categoryId) ?: throw IllegalArgumentException("해당 카테고리가 존재하지 않습니다")
+        return categoryRepository.findByIdOrNull(categoryId) ?: throw CategoryNotFoundException()
     }
 }
