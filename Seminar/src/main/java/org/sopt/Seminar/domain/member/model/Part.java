@@ -1,4 +1,4 @@
-package org.sopt.Seminar.member.domain;
+package org.sopt.Seminar.domain.member.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

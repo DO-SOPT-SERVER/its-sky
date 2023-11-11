@@ -1,7 +1,7 @@
-package org.sopt.Seminar.member.dto;
+package org.sopt.Seminar.domain.member.dto;
 
 import lombok.Data;
-import org.sopt.Seminar.member.domain.Part;
+import org.sopt.Seminar.domain.member.model.Part;
 
 @Data
 public class MemberProfileUpdateRequest {
