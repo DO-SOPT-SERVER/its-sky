@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.GenerationType.*
 import jakarta.persistence.Id
+import org.sopt.kotlinsemina.global.common.model.BaseTimeEntity
 
 @Entity
 class Member(
@@ -15,7 +16,7 @@ class Member(
     var nickname: String,
     var age: Int,
     var sopt: SOPT,
-) {
+): BaseTimeEntity() {
     fun updateSOPT(sopt: SOPT) {
         this.sopt = sopt
     }
