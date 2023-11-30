@@ -24,12 +24,18 @@ class Post(
     @Column(name = "post_id")
     val id: Long = 0
 
+    var imageUrl: String? = null
+
     var title: String = title
         private set
 
     @Column(columnDefinition = "TEXT")
     var content: String = content
         private set
+
+    constructor(title: String, content: String, member: Member, categoryId: CategoryId, imageUrl: String) : this(title, member, categoryId, content) {
+        this.imageUrl = imageUrl
+    }
 
     fun updateContent(content: String) {
         this.content = content
