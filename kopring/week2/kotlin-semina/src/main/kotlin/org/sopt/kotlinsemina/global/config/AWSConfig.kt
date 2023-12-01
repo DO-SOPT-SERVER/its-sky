@@ -7,11 +7,20 @@ import org.springframework.context.annotation.Configuration
 import software.amazon.awssdk.auth.credentials.SystemPropertyCredentialsProvider
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.s3.S3Client
+import software.amazon.awssdk.services.s3.presigner.S3Presigner
 
 @Configuration
 class AWSConfig(
     val awsProperty: AwsProperty
 ) {
+
+    @Bean
+    fun getS3Presigner(): S3Presigner {
+        return S3Presigner.builder()
+            .region(getRegion())
+            .credentialsProvider(systemPropertyCredentialsProvider())
+            .build()
+    }
 
     @Bean
     fun systemPropertyCredentialsProvider(): SystemPropertyCredentialsProvider {
