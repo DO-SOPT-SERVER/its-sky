@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
+import java.security.Principal
 
 @RestController
 @RequestMapping("/api/post")
@@ -22,8 +23,9 @@ class PostController(
     private val postService: PostService
 ) {
     @PostMapping
-    fun createPost(@RequestHeader(CUSTOM_AUTH_ID) memberId: Long,
-                   @RequestBody request: PostCreateRequest) : ResponseEntity<Void> {
+    fun createPost(@RequestBody request: PostCreateRequest,
+                   principal: Principal) : ResponseEntity<Void> {
+        val memberId = principal.name.toLong()
         val location = URI.create(POST_API_ENDPOINT + postService.create(request, memberId))
 
         return ResponseEntity.created(location).build()
