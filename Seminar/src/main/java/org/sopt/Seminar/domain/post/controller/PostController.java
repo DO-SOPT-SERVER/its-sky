@@ -1,6 +1,7 @@
 package org.sopt.Seminar.domain.post.controller;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.sopt.Seminar.domain.post.dto.PostCreateRequest;
@@ -19,8 +20,9 @@ public class PostController {
     private static final String POST_API_ENDPOINT = "/api/post/";
 
     @PostMapping
-    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
-                                           @RequestBody PostCreateRequest request) {
+    public ResponseEntity<Void> createPost(@RequestBody PostCreateRequest request,
+                                           Principal principal) {
+        Long memberId = Long.valueOf(principal.getName());
         URI location = URI.create(POST_API_ENDPOINT + postService.create(request, memberId));
         return ResponseEntity.created(location).build();
     }
