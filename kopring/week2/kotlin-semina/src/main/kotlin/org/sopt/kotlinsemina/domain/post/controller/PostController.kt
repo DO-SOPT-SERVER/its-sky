@@ -1,5 +1,6 @@
 package org.sopt.kotlinsemina.domain.post.controller
 
+import jakarta.validation.Valid
 import org.sopt.kotlinsemina.domain.post.dto.PostCreateRequest
 import org.sopt.kotlinsemina.domain.post.dto.PostGetResponse
 import org.sopt.kotlinsemina.domain.post.dto.PostUpdateRequest
@@ -23,7 +24,7 @@ class PostController(
     private val postService: PostService
 ) {
     @PostMapping
-    fun createPost(@RequestBody request: PostCreateRequest,
+    fun createPost(@Valid @RequestBody request: PostCreateRequest,
                    principal: Principal) : ResponseEntity<Void> {
         val memberId = principal.name.toLong()
         val location = URI.create(POST_API_ENDPOINT + postService.create(request, memberId))

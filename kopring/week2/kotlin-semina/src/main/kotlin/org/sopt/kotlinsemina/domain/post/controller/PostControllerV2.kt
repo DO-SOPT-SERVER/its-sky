@@ -1,5 +1,6 @@
 package org.sopt.kotlinsemina.domain.post.controller
 
+import jakarta.validation.Valid
 import org.sopt.kotlinsemina.domain.post.dto.PostCreateRequest
 import org.sopt.kotlinsemina.domain.post.service.PostServiceV2
 import org.springframework.http.ResponseEntity
@@ -23,7 +24,7 @@ class PostControllerV2(
     @PostMapping
     fun createPostV2(@RequestHeader(CUSTOM_AUTH_ID) memberId: Long,
                      @RequestPart image: MultipartFile,
-                     request: PostCreateRequest): ResponseEntity<Void> {
+                     @Valid @RequestBody request: PostCreateRequest): ResponseEntity<Void> {
         val location = URI.create(POST_API_ENDPOINT + postService.createV2(request, image, memberId))
         return ResponseEntity.created(location).build()
     }

@@ -1,4 +1,6 @@
 package org.sopt.kotlinsemina.domain.customer.repository
 
-interface CustomerRepository {
-}
+import org.sopt.kotlinsemina.domain.customer.model.CustomerEntity
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface CustomerRepository: JpaRepository<CustomerEntity, Long>

@@ -1,3 +1,7 @@
 package org.sopt.kotlinsemina.domain.customer.dto
 
-data class CustomerRequest()
+data class CustomerRequest(
+    val name: String,
+    val age: Int,
+    val nickname: String
+)
